@@ -45,9 +45,12 @@ class Offering with _$Offering {
 
   /// Retrieves a specific package by identifier, use this to access custom
   /// package types configured in the RevenueCat dashboard.
-  Package? getPackage(String identifier) => availablePackages
-      .firstWhereOrNull((package) => package.identifier == identifier);
+  Package? getPackage(String identifier) {
+    for (final package in availablePackages) {
+      if (package.identifier == identifier) return package;
+    }
+    return null;
+  }
 
-  factory Offering.fromJson(Map<String, dynamic> json) =>
-      _$OfferingFromJson(json);
+  factory Offering.fromJson(Map<String, dynamic> json) => _$OfferingFromJson(json);
 }
